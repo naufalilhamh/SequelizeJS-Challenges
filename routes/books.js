@@ -18,7 +18,7 @@ module.exports = function(app) {
       );
   });
   /* POST todo. */
-  app.post("/books", function(req, res, next) {
+  app.post("/books", function(req, res) {
     const {
       title,
       author,
@@ -53,11 +53,22 @@ module.exports = function(app) {
   /* update todo. */
   app.put("/books/:id", function(req, res, next) {
     const books_id = req.params.id;
-    const { title, description } = req.body;
+    const {
+      title,
+      author,
+      published_date,
+      pages,
+      language,
+      publisher_id
+    } = req.body;
     model.Books.update(
       {
         title: title,
-        description: description
+        author: author,
+        published_date: published_date,
+        pages: pages,
+        language: language,
+        publisher_id: publisher_id
       },
       {
         where: {
